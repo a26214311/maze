@@ -135,12 +135,14 @@ var right2='<img width=64 height=64 src="img/right2.png" onclick="keymove(39);">
 	    		ranklist=ranklist+'<td><div style="text-align: center"><font color="'+'purple'+'" size="'+5+'">'+'name'+'</font></div></td>';
 	    		ranklist=ranklist+'<td><div style="text-align: center"><font color="'+'purple'+'" size="'+5+'">'+'time'+'</font></div></td>';
 	    		ranklist=ranklist+'<td><div style="text-align: center"><font color="'+'purple'+'" size="'+5+'">'+'step'+'</font></div></td></tr>';
-				
+			ranklist=ranklist+'<td><div style="text-align: center"><font color="'+'purple'+'" size="'+5+'">'+'score'+'</font></div></td></tr>';
+	
 		    	for(var i=0;i<10;i++){
 		    		if(result[i]==undefined) break;
 		    		var name=result[i].get("n");
 		    		var time=result[i].get("t");
 		    		var step=result[i].get("s");
+		    		var st=result[i].get("st");
 		    		var color;
 		    		var size;
 		    		if(i==0){
@@ -157,6 +159,7 @@ var right2='<img width=64 height=64 src="img/right2.png" onclick="keymove(39);">
 		    		ranklist=ranklist+'<td><div style="text-align: center"><font color="'+color+'" size="'+size+'">'+name+'</font></div></td>';
 		    		ranklist=ranklist+'<td><div style="text-align: center"><font color="'+color+'" size="'+size+'">'+time+'</font></div></td>';
 		    		ranklist=ranklist+'<td><div style="text-align: center"><font color="'+color+'" size="'+size+'">'+step+'</font></div></td></tr>';
+		    		ranklist=ranklist+'<td><div style="text-align: center"><font color="'+color+'" size="'+size+'">'+st+'</font></div></td></tr>';
 		    	}
 		    	ranklist=ranklist+'</table></div>';
 		    	$('#ranklist').html(ranklist);
