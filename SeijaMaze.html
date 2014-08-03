@@ -126,7 +126,7 @@ var right2='<img width=64 height=64 src="img/right2.png" onclick="keymove(39);">
 	function getranklist(){
 		Parse.initialize(appid, jskey);
 		var query=new Parse.Query("Score");
-		query.addAscending("t");
+		query.addAscending("st");
 		query.limit(10);
 		query.find({
 			success:function(result){
