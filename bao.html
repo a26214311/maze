@@ -39,8 +39,8 @@ var perw=24;
 var perh=24;
 var cha='<img width='+perw+' height='+perh+' src="img/ye.png"></img>';
 var blo='<img width='+perw+' height='+perh+' src="img/maoyu.jpg"></img>';
-var row=20;
-var line=35;
+var row=22;
+var line=31;
 var block=new Array();
 
 
@@ -90,7 +90,7 @@ var right2='<img width=64 height=64 src="img/right2.png" onclick="keymove(39);">
     		ranklist=ranklist+'<td><div style="text-align: center"><font color="'+color+'" size="'+size+'">'+step+'</font></div></td></tr>';
     	}
     	ranklist=ranklist+'</table></div>';
-    	rt=rt+'<tr><td>'+''+'</td><td style="width:256px;height:256px">'+r+'</td><td>'+''+'</td></tr></table>';
+    	rt=rt+'<tr><td>'+''+'</td><td style="width:256px;height:256px">'+r+'</td><td>'+ranklist+'</td></tr></table>';
     	$('#main').html(rt);
     	init();
 	}
@@ -126,7 +126,7 @@ var right2='<img width=64 height=64 src="img/right2.png" onclick="keymove(39);">
 	var num=['①','②','③','④','⑤','⑥','⑦','⑧','⑨','⑩'];
 	function getranklist(){
 		Parse.initialize(appid, jskey);
-		var query=new Parse.Query("Score");
+		var query=new Parse.Query("BaoScore");
 		query.addAscending("t");
 		query.limit(10);
 		query.find({
@@ -135,13 +135,11 @@ var right2='<img width=64 height=64 src="img/right2.png" onclick="keymove(39);">
 	    		ranklist=ranklist+'<tr><td><div style="text-align: center"><font color="'+'purple'+'" size="'+5+'">'+'名次'+'</font></div></td>';
 	    		ranklist=ranklist+'<td><div style="text-align: center"><font color="'+'purple'+'" size="'+5+'">'+'name'+'</font></div></td>';
 	    		ranklist=ranklist+'<td><div style="text-align: center"><font color="'+'purple'+'" size="'+5+'">'+'time'+'</font></div></td>';
-	    		ranklist=ranklist+'<td><div style="text-align: center"><font color="'+'purple'+'" size="'+5+'">'+'step'+'</font></div></td></tr>';
 				
 		    	for(var i=0;i<10;i++){
 		    		if(result[i]==undefined) break;
 		    		var name=result[i].get("n");
 		    		var time=result[i].get("t");
-		    		var step=result[i].get("s");
 		    		var color;
 		    		var size;
 		    		if(i==0){
@@ -157,7 +155,6 @@ var right2='<img width=64 height=64 src="img/right2.png" onclick="keymove(39);">
 		    		ranklist=ranklist+'<tr><td><div style="text-align: center"><font color="'+color+'" size="'+size+'">'+num[i]+'</font></div></td>';
 		    		ranklist=ranklist+'<td><div style="text-align: center"><font color="'+color+'" size="'+size+'">'+name+'</font></div></td>';
 		    		ranklist=ranklist+'<td><div style="text-align: center"><font color="'+color+'" size="'+size+'">'+time+'</font></div></td>';
-		    		ranklist=ranklist+'<td><div style="text-align: center"><font color="'+color+'" size="'+size+'">'+step+'</font></div></td></tr>';
 		    	}
 		    	ranklist=ranklist+'</table></div>';
 		    	$('#ranklist').html(ranklist);
@@ -173,7 +170,10 @@ var right2='<img width=64 height=64 src="img/right2.png" onclick="keymove(39);">
 	var fairyi='<img width='+perw+' height='+perh+' src="img/fairy.jpg"></img>';
 	var f1p=new Array();
 	var f2p=new Array();
-	
+	var f3p=new Array();
+	var f4p=new Array();
+	var f5p=new Array();
+	var f6p=new Array();
 	function showcha(from){
 		if(block[flanp[0]][flanp[1]]==0&&block[seijap[0]][seijap[1]]==0){
 			var mid=Math.floor(line/2);
@@ -182,6 +182,8 @@ var right2='<img width=64 height=64 src="img/right2.png" onclick="keymove(39);">
 			$('#t_'+seijap[0]+'_'+seijap[1]).html(seijai);
 			$('#t_'+f1p[0]+'_'+f1p[1]).html(fairyi);
 			$('#t_'+f2p[0]+'_'+f2p[1]).html(fairyi);
+			$('#t_'+f3p[0]+'_'+f3p[1]).html(fairyi);
+			$('#t_'+f4p[0]+'_'+f4p[1]).html(fairyi);
 		}else{
 			alert('error');
 		}
@@ -195,6 +197,8 @@ var right2='<img width=64 height=64 src="img/right2.png" onclick="keymove(39);">
 		seijap=[x,line-1];
 		f1p=new Array();
 		f2p=new Array();
+		f3p=new Array();
+		f4p=new Array();
 		for(var i=0;i<row;i++){
 			for(var j=0;j<line;j++){
 				block[i][j]=0;
@@ -209,8 +213,14 @@ var right2='<img width=64 height=64 src="img/right2.png" onclick="keymove(39);">
     	var lf1=Math.floor(line*Math.random());
 		var rf2=Math.floor(row*Math.random());
     	var lf2=Math.floor(line*Math.random());
+		var rf3=Math.floor(row*Math.random());
+    	var lf3=Math.floor(line*Math.random());
+		var rf4=Math.floor(row*Math.random());
+    	var lf4=Math.floor(line*Math.random());
     	f1p=[rf1,lf1];
     	f2p=[rf2,lf2];
+    	f3p=[rf3,lf3];
+    	f4p=[rf4,lf4];
 		var mid=Math.floor(line/2);
 		for(var i=1;i<row;i++){
 			addx(i,mid);
@@ -402,7 +412,7 @@ var right2='<img width=64 height=64 src="img/right2.png" onclick="keymove(39);">
 	}
 	
 	function checklose(){
-		if(eqar(f1p,flanp)||eqar(f2p,flanp)||eqar(f1p,seijap)||eqar(f2p,seijap)){
+		if(eqar(f1p,flanp)||eqar(f2p,flanp)||eqar(f1p,seijap)||eqar(f2p,seijap)||eqar(f3p,flanp)||eqar(f4p,flanp)||eqar(f3p,seijap)||eqar(f4p,seijap)){
 			alert('被妖精吃掉了，Game Over');
 			init();
 		}
@@ -426,8 +436,30 @@ var right2='<img width=64 height=64 src="img/right2.png" onclick="keymove(39);">
    			$('#t_'+f2p[0]+'_'+f2p[1]).html('');
    			f2p=newf2p;
    		}
+   		
+   		
+   		near=getnear(f3p);
+   		len=near.length;
+   		ran=Math.floor(3*Math.random());
+   		if(ran<len){
+   			var newf3p = near[ran];
+   			$('#t_'+f3p[0]+'_'+f3p[1]).html('');
+   			f3p=newf3p;
+   		}
+   		
+   		
+   		near=getnear(f4p);
+   		len=near.length;
+   		ran=Math.floor(3*Math.random());
+   		if(ran<len){
+   			var newf4p = near[ran];
+   			$('#t_'+f4p[0]+'_'+f4p[1]).html('');
+   			f4p=newf4p;
+   		}
    		showcha();
 	}
+	
+
 
 	
 	function changegravity(){
@@ -545,7 +577,7 @@ var right2='<img width=64 height=64 src="img/right2.png" onclick="keymove(39);">
    	
    	function addx(x,y){
    			var mid=Math.floor(line/2);
-   			var forbidpoints=[flanp,seijap,[0,mid-1],[0,mid],[0,mid+1],f1p,f2p];
+   			var forbidpoints=[flanp,seijap,[0,mid-1],[0,mid],[0,mid+1],f1p,f2p,f3p,f4p];
 			if(block[x][y]==0){
 				var canadd=true;
 				for(var i=0;i<forbidpoints.length;i++){
