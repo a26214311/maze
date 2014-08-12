@@ -164,7 +164,7 @@ var right2='<img width=64 height=64 src="img/right2.png" onclick="keymove(39);">
 	}
 	
 	var flanp=[row-1,0];
-	var seijap=[0,line-1];
+	var seijap=[row-1,line-1];
 	var flani='<img width='+perw+' height='+perh+' src="img/ye.png"></img>';
 	var seijai='<img width='+perw+' height='+perh+' src="img/9.png"></img>';
 	var heart='<img width='+perw+' height='+perh+' src="img/heart.jpg"></img>';
@@ -183,8 +183,9 @@ var right2='<img width=64 height=64 src="img/right2.png" onclick="keymove(39);">
 		$('#t_'+from[0]+'_'+from[1]).html('');
 	}
 	function clear(){
+		var x=Math.floor(Math.random()*row);
 		flanp=[row-1,0];
-		seijap=[0,line-1];
+		seijap=[x,line-1];
 		for(var i=0;i<row;i++){
 			for(var j=0;j<line;j++){
 				block[i][j]=0;
@@ -199,7 +200,7 @@ var right2='<img width=64 height=64 src="img/right2.png" onclick="keymove(39);">
 		for(var i=1;i<row;i++){
 			addx(i,mid);
 		}
-		for(var i=0;i<280;i++){
+		for(var i=0;i<290;i++){
 			var r1=Math.floor(row*Math.random());
 	    	var l1=Math.floor(line*Math.random());
 	    	addx(r1,l1);
