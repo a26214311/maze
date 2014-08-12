@@ -115,7 +115,7 @@ var right2='<img width=64 height=64 src="img/right2.png" onclick="keymove(39);">
 	
 	var allplayer=1;
 	function getall(){
-		var query=new Parse.Query("Score");
+		var query=new Parse.Query("BaoScore");
 		query.count({
 			success:function(result){
 				allplayer=result;
@@ -411,7 +411,7 @@ var right2='<img width=64 height=64 src="img/right2.png" onclick="keymove(39);">
 	function fairymove(){
    		var near=getnear(f1p);
    		var len=near.length;
-   		var ran=Math.floor(4*Math.random());
+   		var ran=Math.floor(3*Math.random());
    		if(ran<len){
    			var newf1p = near[ran];
    			$('#t_'+f1p[0]+'_'+f1p[1]).html('');
@@ -420,7 +420,7 @@ var right2='<img width=64 height=64 src="img/right2.png" onclick="keymove(39);">
    		
    		near=getnear(f2p);
    		len=near.length;
-   		ran=Math.floor(4*Math.random());
+   		ran=Math.floor(3*Math.random());
    		if(ran<len){
    			var newf2p = near[ran];
    			$('#t_'+f2p[0]+'_'+f2p[1]).html('');
@@ -530,6 +530,7 @@ var right2='<img width=64 height=64 src="img/right2.png" onclick="keymove(39);">
    					var les=(''+(100*(allplayer-result)/allplayer)).substring(0,5) +'%';
    					var r2='您的排名为：'+(result+1)+'，超过了'+les+'的玩家';
    					alert(r2);
+   					init();
    				}
    			})
    			
