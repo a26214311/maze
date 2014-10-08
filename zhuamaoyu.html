@@ -65,6 +65,13 @@ function start(){
 }
 
 function action(box){
+	var a=box.split('_');
+	var x=a[1];
+	var y=a[2];
+	var o=gold[y];
+	var r=row-1-x;
+	if(r>=o)
+		return;
 	cli(box,1);
 	if(ifwin()){
 		alert('win');
