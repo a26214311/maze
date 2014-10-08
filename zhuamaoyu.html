@@ -4,7 +4,12 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>Start</title>
 <script type="text/javascript"  src="javascripts/jquery-1.7.1.min.js"></script>
+<script src="javascripts/parse-1.2.19.min.js"></script>
 <script type="text/javascript">
+
+var appid = "rekujmyginVtn9rVcPcOR3zxmFpo7MTigNd3t90y";
+var jskey = "OjNDfDKeMNoGTR4Pr4iyal6kW0Cgbj5yL4Tebj1v";
+
 var row=10;
 var line=10;
 
@@ -24,6 +29,9 @@ $(document).ready(function() {
 	}
 	r=r+'</table>';
 	$('#main').html(r);
+	var zmy=new Parse.Object.extend("ZMY");
+	zmy.set("x",0);
+	zmy.save();
 }
 );
 var level=3;
