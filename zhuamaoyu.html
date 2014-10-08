@@ -26,7 +26,9 @@ $(document).ready(function() {
 	$('#main').html(r);
 }
 );
-function init(){
+var level=3;
+function init(x){
+	level=x;
 	start();
 	setTimeout(new1,10);
 }
@@ -43,8 +45,29 @@ function new1(){
 function start(){
 	th='';
 	$('#text').html(th);
-	for(var i=0;i<line;i++){
-		gold[i]=Math.floor(Math.random()*row);
+	var max=line;
+	if(level==0){
+		max=line-4;
+	}else if(level==1){
+		max=line-3;
+	}else if(level==2){
+		max=line-2;
+	}else if(level==3){
+		max=line;
+	}
+	for(var i=0;i<max;i++){
+		if(level==0){
+			gold[i]=Math.floor(Math.random()*row*0.5);
+		}else if(level==1){
+			gold[i]=Math.floor(Math.random()*row*0.65);
+		}else if(level==2){
+			gold[i]=Math.floor(Math.random()*row*0.8);
+		}else if(level==3){
+			gold[i]=Math.floor(Math.random()*row);
+		}
+	}
+	for(var i=max;i<line;i++){
+		gold[i]=0;
 	}
 	var r= '<table borderColor=#2459EB border=3>';
 	for(var i=0;i<row;i++){
@@ -234,11 +257,11 @@ function copya(from){
 只能抓一堆毛玉中的1个或多个<br>
 抓到最后一只毛玉的获胜<br>
 </div>
-<img src="img/easy.png" alt="Easy" width=150 height=75 onclick="init();"></img><br><br>
-<img src="img/normal.png" alt="Normal" width=150 height=75 onclick="init();"></img><br><br>
-<img src="img/hard.png" alt="Hard" width=150 height=75 onclick="init();"></img><br><br>
-<img src="img/lunatic.png" alt="Lunatic" width=150 height=75 onclick="init();"></img><br><br>
-<img src="img/extra.png" alt="VS Mode" width=150 height=75 onclick="init();"></img><br><br>
+<img src="img/easy.png" alt="Easy" width=150 height=75 onclick="init(0);"></img><br><br>
+<img src="img/normal.png" alt="Normal" width=150 height=75 onclick="init(1);"></img><br><br>
+<img src="img/hard.png" alt="Hard" width=150 height=75 onclick="init(2);"></img><br><br>
+<img src="img/lunatic.png" alt="Lunatic" width=150 height=75 onclick="init(3);"></img><br><br>
+<img src="img/extra.png" alt="VS Mode" width=150 height=75 onclick="init(4);"></img><br><br>
 </td>
 </tr>
 </table>
