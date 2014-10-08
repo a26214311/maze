@@ -98,10 +98,12 @@ function action(box){
 	cli(box,1);
 	if(ifwin()){
 		alert('win');
+		return;
 	}
 	ai();
 	if(ifwin()){
 		alert('lose');
+		return;
 	}
 }
 function ifwin(){
