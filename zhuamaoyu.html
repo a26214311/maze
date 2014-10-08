@@ -155,6 +155,8 @@ function ai(){
 }
 function rd(){
 	var f=Math.floor(Math.random()*line);
+	if(ifwin())
+		return;
 	while(true){
 		if(gold[f]!=0)
 			break;
