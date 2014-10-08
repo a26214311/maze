@@ -1,0 +1,237 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Frameset//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-frameset.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Start</title>
+<script type="text/javascript"  src="javascripts/jquery-1.7.1.min.js"></script>
+<script type="text/javascript">
+var row=10;
+var line=10;
+
+var perw=44;
+var perh=44;
+var gold=new Array();
+var goldimg='<img src="img/maoyu.jpg" style="width:'+perw+'px;height:'+perh+'px"></img>';
+$(document).ready(function() {
+	var r= '<table borderColor=#2459EB border=3>';
+	for(var i=0;i<row;i++){
+		r=r+'<tr>';
+		for(var j=0;j<line;j++){
+			var n=i*line+j;
+			r=r+'<td style="background-color:#21C3D5;width:'+perw+'px;height:'+perh+'px"><div id="t_'+i+'_'+j+'" onclick="action(this.id);" style="width:'+perw+'px;height:'+perh+'px">'+''+'</div></td>';
+		}
+		r=r+'</tr>';
+	}
+	r=r+'</table>';
+	$('#main').html(r);
+}
+);
+function init(){
+	start();
+	setTimeout(new1,10);
+}
+function new1(){
+	if(window.confirm('请选择是否先抓毛玉')){
+			
+		}else{
+			ai();
+			if(ifwin()){
+				alert('lose');
+			}
+		}
+}
+function start(){
+	th='';
+	$('#text').html(th);
+	for(var i=0;i<line;i++){
+		gold[i]=Math.floor(Math.random()*row);
+	}
+	var r= '<table borderColor=#2459EB border=3>';
+	for(var i=0;i<row;i++){
+		r=r+'<tr>';
+		for(var j=0;j<line;j++){
+			var n=i*line+j;
+			r=r+'<td style="background-color:#21C3D5;width:'+perw+'px;height:'+perh+'px"><div id="t_'+i+'_'+j+'" onclick="action(this.id);" style="width:'+perw+'px;height:'+perh+'px">'+''+'</div></td>';
+		}
+		r=r+'</tr>';
+	}
+	r=r+'</table>';
+	$('#main').html(r);
+	for(var i=0;i<line;i++){
+		for(j=row-1;j>row-1-gold[i];j--){
+			$('#t_'+j+'_'+i).html(goldimg);
+		}
+	}
+}
+
+function action(box){
+	cli(box,1);
+	if(ifwin()){
+		alert('win');
+	}
+	ai();
+	if(ifwin()){
+		alert('lose');
+	}
+}
+function ifwin(){
+	for(var i=0;i<line;i++){
+		if(gold[i]!=0){
+			return false;
+		}
+	}
+	return true;
+}
+
+var th='';
+function cli(box,from){
+	var a=box.split('_');
+	var x=a[1];
+	var y=a[2];
+	var o=gold[y];
+	gold[y]=row-1-x;
+	for(var j=0;j<row-gold[y];j++){
+		$('#t_'+j+'_'+y).html('');
+	}
+	th=th+from+':从第'+(parseInt(y)+1)+'堆中拿走'+(o-gold[y])+'个<br>';
+	$('#text').html(th);
+}
+
+
+
+function sn(a,b){
+	return (a - b);
+}
+function ai(){
+	for(var i=0;i<gold.length;i++){
+		if(gold[i]==0)
+			continue;
+		var t=copya(gold);
+		for(var j=0;j<gold[i];j++){
+			t[i]=j;
+			if(check(t)){
+				var x=row-1-j;
+				var y=i;
+				console.log('#t_'+x+'_'+y);
+				cli('#t_'+x+'_'+y,2);
+				console.log('safe');
+				return;
+			}else{
+				console.log('unsafe');
+			}
+		}
+	}
+	rd();
+}
+function rd(){
+	var f=Math.floor(Math.random()*line);
+	while(true){
+		if(gold[f]!=0)
+			break;
+		else
+			f=Math.floor(Math.random()*line);
+	}
+	var y=f;
+	var x=row-1-Math.floor(Math.random()*gold[f]);
+	cli('#t_'+x+'_'+y,2);
+}
+
+
+function check(ar){
+	var t1=small2(ar);
+	var t2=small(t1);
+	if(t2[t2.length-1]==0)
+		return true;
+	else
+		return false;
+}
+
+function small(ar){
+	var t0=copya(ar);
+	var r=t0.sort(sn);
+	for(var i=1;i<ar.length;i++){
+		if(ar[i]!=0){
+			if(ar[i-1]==ar[i]){
+				r[i-1]=0;
+				r[i]=0;
+				return small(r);
+				break;
+			}
+		}
+	}
+	return r;
+}
+
+function small2(ar){
+	var t0=copya(ar);
+	var t1=t0.sort(sn);
+	for(var i=t1.length-1;i>=0;i--){
+		if(t1[i]==9){
+			t1[i]=0;
+			t1[t1.length]=1;
+			t1[t1.length]=8;
+			return (small2(t1));
+			break;
+		}
+		else if(t1[i]==7){
+			t1[i]=0;
+			t1[t1.length]=1;
+			t1[t1.length]=6;
+			return (small2(t1));
+			break;
+		}
+		else if(t1[i]==6){
+			t1[i]=0;
+			t1[t1.length]=2;
+			t1[t1.length]=4;
+			return (small2(t1));
+			break;
+		}
+		else if(t1[i]==5){
+			t1[i]=0;
+			t1[t1.length]=1;
+			t1[t1.length]=4;
+			console.log(t1);
+			return (small2(t1));
+			break;
+		}
+		else if(t1[i]==3){
+			t1[i]=0;
+			t1[t1.length]=1;
+			t1[t1.length]=2;
+			return (small2(t1));
+			break;
+		}
+	}
+	return t1;
+}
+
+function copya(from){
+	var r=new Array();
+	for(var i=0;i<from.length;i++){
+		r[i]=from[i];
+	}
+	return r;
+}
+</script>
+</head>
+<body>
+<table>
+<tr>
+<td>
+<div id="main"></div>
+</td>
+<td>
+<div id="info">
+轮流抓毛玉<br>
+只能抓一堆毛玉中的1个或多个<br>
+抓到最后一只毛玉的获胜<br>
+</div>
+<img src="img/start.png" width=200 height=100 onclick="init();"></img>
+</td>
+</tr>
+</table>
+<div id="text"></div>
+
+</body>
+</html>
