@@ -133,7 +133,7 @@ function cli(box,from){
 	for(var j=0;j<row-gold[y];j++){
 		$('#t_'+j+'_'+y).html('');
 	}
-	th=th+from+':从第'+(parseInt(y)+1)+'堆中拿走'+(o-gold[y])+'个<br>';
+	th=th+from+':从第'+(parseInt(y)+1)+'堆中拿走'+(o-gold[y])+'个,剩余数量： '+goldy.toString()+'<br>';
 	$('#text').html(th);
 }
 
