@@ -22,7 +22,9 @@ body { font-family: Helvetica, Arial, sans-serif;
 <div id="main">
 </div>
 <div id="instruct" style="text-align:center width:600px" ><font color="red" size=5><b>
-
+芙兰:来玩捉迷藏吧，我藏起来了哦<br>
+芙兰:来抓我吧<br>
+（点击空白处显示距离，最速抓到芙兰吧)<br>
 </b></font></div>
 <div id="wzz"></div>
 
@@ -128,6 +130,8 @@ var right2='<img width=64 height=64 src="img/right2.png" onclick="keymove(39);">
 			
 		}else{
 			$('#t_'+rowp+'_'+linep).html(diss);
+			
+			document.getElementById("wzz").innerHTML=document.getElementById("wzz").innerHTML+"<br>我在这呢～";
 			step++;
 		}
 			
