@@ -239,7 +239,7 @@ var right2='<img width=64 height=64 src="img/right2.png" onclick="keymove(39);">
 	}
 	
 	function start(){
-		for(var i=0;i<480;i++){
+		for(var i=0;i<680;i++){
 			var r1=Math.floor(row*Math.random());
 	    	var l1=Math.floor(line*Math.random());
 	    	addx(r1,l1);
@@ -248,7 +248,7 @@ var right2='<img width=64 height=64 src="img/right2.png" onclick="keymove(39);">
 	
 	function check(){
 		if(caldis(flanp,seijap)==9999){
-			return false;
+			return true;
 		}else{
 			return true;
 		}
