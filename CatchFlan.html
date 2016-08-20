@@ -9,26 +9,61 @@
   <script type="text/javascript" src="javascripts/jquery-1.7.1.min.js"></script>
   <script src="javascripts/parse-1.2.19.min.js"></script>
 
+  <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap-theme.min.css">
+  <link rel="stylesheet" href="dist/style/animate.min.css">
+  <link rel="stylesheet" href="dist/style/base.css">
+
   <style>
     body {
-      font-family: Helvetica, Arial, sans-serif;
-    / / background: url('img/star.jpg') no-repeat center fixed;
-      /*     		background-color:black; */
+      /*font-family: Helvetica, Arial, sans-serif;*/
+      /*background: url('img/star.jpg') no-repeat center fixed;*/
+      /*background-color:black; */
       background-attachment: fixed;
       background-size: 100% 100%;
     }
+
+    #instruct {
+      width: 100%;
+      text-align: center;
+
+    }
+
+    #instruct > p {
+      font-size: 20px;
+      font-weight: bold;
+      color: #d90000;
+    }
+
+    #main {
+      position: relative;
+    }
+
+    #wzz {
+      font-size: 30px;
+      color: #fff;
+      font-weight: bold;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      display: none;
+    }
+
   </style>
+
 
 </head>
 <body>
 <div id="main">
+  <div id="wzz">
+    <br>我在这呢～
+  </div>
 </div>
-<div id="instruct" style="text-align:center; width:600px"><font color="red" size=5><b>
-  芙兰:来玩捉迷藏吧，我藏起来了哦<br>
-  芙兰:来抓我吧<br>
-  （点击空白处显示距离，最速抓到芙兰吧)<br>
-</b></font></div>
-<div id="wzz"></div>
+<div id="instruct">
+  <p>芙兰:来玩捉迷藏吧，我藏起来了哦</p>
+  <p>芙兰:来抓我吧</p>
+  <p>（点击空白处显示距离，最速抓到芙兰吧)</p>
+</div>
 
 
 <script type="text/javascript">
@@ -93,7 +128,7 @@
       }
       ranklist = ranklist + '</table></div>';
       rt = rt + '<tr><td style="width:256px;height:256px">' + r + '</td><td>' + ranklist + '</td></tr></table>';
-      $('#main').html(rt);
+      $('#main').append(rt);
 
       init();
     }
@@ -131,7 +166,22 @@
     } else {
       $('#t_' + rowp + '_' + linep).html(diss);
 
-      document.getElementById("wzz").innerHTML = document.getElementById("wzz").innerHTML + "<br>我在这呢～";
+//      document.getElementById("wzz").innerHTML = document.getElementById("wzz").innerHTML + "<br>我在这呢～";
+      // add animation
+      $('#wzz')
+        .css({
+          'top': 10 + Math.floor(Math.random() * 60) + '%',
+          'left': 10 + Math.floor(Math.random() * 60) + '%'
+        })
+        .show()
+        .removeClass('slideInUp slideInDown slideInLeft slideInRight animated')
+        .addClass(['slideInUp', 'slideInDown', 'slideInLeft', 'slideInRight'][Math.floor(Math.random() * 4)] + ' animated')
+        .one("webkitAnimationEnd animationEnd", function () {
+          $('#wzz')
+            .removeClass('slideInUp slideInDown slideInLeft slideInRight animated')
+            .hide()
+        })
+
       step++;
     }
 
